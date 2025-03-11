@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Installs and configures Nginx on a server
+
+# Update package list and install Nginx
+apt-get update -y
+apt-get install -y nginx
+
+# Create a custom HTML file for the root page
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+
+# Restart Nginx (without using systemctl)
+service nginx restart
