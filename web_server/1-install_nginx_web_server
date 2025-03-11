@@ -1,12 +1,20 @@
 #!/usr/bin/env bash
-# Update package lists to ensure latest information
-sudo apt-get update -y
+# Installs and configures Nginx web server on Ubuntu.
 
-# Install nginx with automatic "yes" confirmation
-sudo apt-get install -y nginx
+# Update package list and install Nginx
+apt-get update -y
+apt-get install -y nginx
 
-# Configure Nginx to display "Holberton School" on the home page
-echo "Holberton School for the win!" | sudo tee /var/www/html/index.html > /dev/null
+# Ensure Nginx is running
+service nginx start
 
-# Restart Nginx without using systemctl (use the service command instead)
-sudo service nginx restart
+# Create a custom index page
+echo "Holberton School for the win!" | tee /var/www/html/index.html
+
+# Restart Nginx (without systemctl)
+if pgrep nginx > /dev/null; then
+    service nginx reload
+else
+    service nginx start
+fi
+
